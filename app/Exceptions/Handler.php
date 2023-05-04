@@ -3,6 +3,11 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -44,5 +49,22 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param Request $request
+     * @param Throwable $exception
+     * @return Response|JsonResponse
+     * @throws Throwable
+     */
+    public function render($request, Throwable $exception): Response|JsonResponse
+    {
+        if ($exception instanceof ValidationException) {
+            throw new HttpResponseException(response()->json($exception->errors(), 400));
+        }
+
+        return parent::render($request, $exception);
     }
 }

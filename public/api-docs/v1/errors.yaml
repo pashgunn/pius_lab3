@@ -1,0 +1,27 @@
+ErrorResponse:
+  type: object
+  properties:
+    data:
+      type: object
+      nullable: true
+    errors:
+      type: array
+      description: Error array
+      items:
+        $ref: '#/Error'
+  required:
+    - data
+    - errors
+
+Error:
+  type: object
+  properties:
+    code:
+      description: String code error
+      type: string
+    message:
+      description: Error description
+      type: string
+  required:
+    - code
+    - message

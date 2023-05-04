@@ -1,0 +1,17 @@
+PathId:
+  in: path
+  name: id
+  required: true
+  schema:
+    type: integer
+    minimum: 1
+  description: Integer id
+  example: 1
+
+QueryInclude:
+  in: query
+  name: include
+  required: false
+  description: Related entities to load, comma separated
+  schema:
+    type: string
