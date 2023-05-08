@@ -1,0 +1,118 @@
+Tags:
+  post:
+    tags:
+      - tags
+    operationId: addTag
+    summary: Create Tag
+    description: Create new Tag
+    requestBody:
+      description: Tags request body
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: './schemas/tags.yaml#/TagCreateRequestBody'
+    responses:
+      "201":
+        description: Success created
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/tags.yaml#/TagResponse'
+      "400":
+        $ref: '../index.yaml#/components/responses/BadRequest'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
+TagsOne:
+  get:
+    tags:
+      - tags
+    operationId: getTag
+    summary: Get one tag
+    description: Get one tag
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/tags.yaml#/TagResponse'
+      "404":
+        $ref: '../index.yaml#/components/responses/NotFound'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
+  patch:
+    tags:
+      - tags
+    operationId: patchTag
+    summary: Updating part of the Tag fields
+    description: Updating part of the Tag fields
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: './schemas/tags.yaml#/TagPatchRequestBody'
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/tags.yaml#/TagResponse'
+      "400":
+        $ref: '../index.yaml#/components/responses/BadRequest'
+      "404":
+        $ref: '../index.yaml#/components/responses/NotFound'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
+  put:
+    tags:
+      - tags
+    operationId: putTag
+    summary: Updating Tag
+    description: Updating Tag
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: './schemas/tags.yaml#/TagUpdateRequestBody'
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/tags.yaml#/TagResponse'
+      "400":
+        $ref: '../index.yaml#/components/responses/BadRequest'
+      "404":
+        $ref: '../index.yaml#/components/responses/NotFound'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
+  delete:
+    tags:
+      - tags
+    operationId: deleteTag
+    summary: Delete Tag
+    description: Delete Tag
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: '../index.yaml#/components/schemas/EmptyDataResponse'
+      "400":
+        $ref: '../index.yaml#/components/responses/BadRequest'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'

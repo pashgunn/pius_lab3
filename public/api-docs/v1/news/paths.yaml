@@ -1,0 +1,178 @@
+News:
+  get:
+    tags:
+      - news
+    operationId: getNews
+    summary: Get list of all News
+    description: Get list of all News
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/news.yaml#/NewsListResponse'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
+  post:
+    tags:
+      - news
+    operationId: addNews
+    summary: Create News
+    description: Create a fresh News
+    requestBody:
+      description: News request body
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: './schemas/news.yaml#/NewsCreateRequestBody'
+    responses:
+      "201":
+        description: Success created
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/news.yaml#/NewsResponse'
+      "400":
+        $ref: '../index.yaml#/components/responses/BadRequest'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
+
+NewsOne:
+  get:
+    tags:
+      - news
+    operationId: getOneNews
+    summary: Get one news
+    description: Get one news
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/news.yaml#/NewsResponse'
+      "404":
+        $ref: '../index.yaml#/components/responses/NotFound'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
+  patch:
+    tags:
+      - news
+    operationId: patchNews
+    summary: Updating part of the News fields
+    description: Updating part of the News fields
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: './schemas/news.yaml#/NewsPatchRequestBody'
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/news.yaml#/NewsResponse'
+      "404":
+        $ref: '../index.yaml#/components/responses/NotFound'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
+  put:
+    tags:
+      - news
+    operationId: putNews
+    summary: Updating News
+    description: Updating News
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: './schemas/news.yaml#/NewsUpdateRequestBody'
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/news.yaml#/NewsResponse'
+      "400":
+        $ref: '../index.yaml#/components/responses/BadRequest'
+      "404":
+        $ref: '../index.yaml#/components/responses/NotFound'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
+  delete:
+    tags:
+      - news
+    operationId: deleteNews
+    summary: Delete News
+    description: Delete News
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: '../index.yaml#/components/schemas/EmptyDataResponse'
+      "404":
+        $ref: '../index.yaml#/components/responses/NotFound'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
+
+NewsTags:
+  get:
+    tags:
+      - news
+    operationId: getAttachedTags
+    summary: Get all tags attached to the news
+    description: Get all tags attached to the news
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/news.yaml#/NewsTagsResponse'
+      "404":
+        $ref: '../index.yaml#/components/responses/NotFound'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
+  post:
+    tags:
+      - news
+    operationId: syncNewsTags
+    summary: Attaches and detaches the specified tags to the news
+    description: Attaches and detaches the specified tags to the news
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: './schemas/news.yaml#/NewsSyncRequestBody'
+    responses:
+      "200":
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/news.yaml#/NewsTagsResponse'
+      "404":
+        $ref: '../index.yaml#/components/responses/NotFound'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'

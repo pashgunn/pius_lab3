@@ -1,0 +1,45 @@
+TagCreateRequestBody:
+  allOf:
+    - $ref: '#/TagFillableProperties'
+    - $ref: '#/TagRequiredProperties'
+
+TagPatchRequestBody:
+  allOf:
+    - $ref: '#/TagFillableProperties'
+
+TagUpdateRequestBody:
+  allOf:
+    - $ref: '#/TagFillableProperties'
+    - $ref: '#/TagRequiredProperties'
+
+TagResponse:
+  type: object
+  properties:
+    data:
+      $ref: '#/Tag'
+  required:
+    - data
+
+Tag:
+  allOf:
+    - $ref: '#/TagFillableProperties'
+    - $ref: '#/TagRequiredProperties'
+
+
+TagFillableProperties:
+  type: object
+  properties:
+    slug:
+      type: string
+      description: Tag slug
+      example: tag-slug
+    name:
+      type: string
+      description: Tag name
+      example: "Tag Name"
+
+TagRequiredProperties:
+  type: object
+  required:
+    - slug
+    - name

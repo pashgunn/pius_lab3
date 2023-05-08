@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: News and Tags
+  version: 1.0.0
+  description: News and Tags
+servers:
+  - url: http://127.0.0.1:8000/api
+tags:
+  - name: news
+    description: All about news
+  - name: tags
+    description: All about Tags
+paths:
+  /v1/news:
+    $ref: './news/paths.yaml#/News'
+  /v1/news/{id}:
+    $ref: './news/paths.yaml#/NewsOne'
+  /v1/news/{id}/tags:
+    $ref: './news/paths.yaml#/NewsTags'
+  /v1/tags:
+    $ref: './tags/paths.yaml#/Tags'
+  /v1/tags/{id}:
+    $ref: './tags/paths.yaml#/TagsOne'
+components:
+  parameters:
+    QueryInclude:
+      $ref: './common_parameters.yaml#/QueryInclude'
+    PathId:
+      $ref: './common_parameters.yaml#/PathId'
+  schemas:
+    EmptyDataResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          nullable: true
+          example: null
+      required:
+        - data
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'
+    ServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: './errors.yaml#/ErrorResponse'
